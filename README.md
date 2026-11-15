@@ -48,3 +48,10 @@ number of places, even if the real values are the same: `FixedDecimal(100, 2)`
 and `FixedDecimal(10, 1)` are both `1.0` but are not equal, and ordering them
 raises `InvalidOperation`. You must normalise places yourself before comparing
 or combining values from different sources.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
